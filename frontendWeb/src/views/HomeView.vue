@@ -101,7 +101,7 @@ const fetchRandomQuote = async () => {
     randomLoading.value = true;
     randomError.value = null;
     const response = await quoteService.getRandomQuote();
-    randomQuote.value = response.quote;
+    randomQuote.value = response;
   } catch (err) {
     randomError.value = "Erreur lors de la récupération de la citation aléatoire";
     console.error(err);
@@ -115,7 +115,7 @@ const loadQuotes = async () => {
     loading.value = true;
     error.value = null;
     const response = await quoteService.getAllQuotes();
-    quotes.value = response.quotes;
+    quotes.value = response;
   } catch (err) {
     error.value = "Erreur lors du chargement des citations";
     console.error(err);

@@ -13,7 +13,7 @@
         <li>Ajouter de nouvelles citations</li>
       </ul>
       <p>
-        Développée avec Vue.js pour le frontend et Node Express.js pour le backend Par KOUYATE Issa.
+        Développée avec Vue.js pour le frontend et Node Express.js pour le backend.
       </p>
     </div>
   </div>
