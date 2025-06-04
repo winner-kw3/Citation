@@ -1,22 +1,11 @@
 {
   "quotes": [
     {
-      "id": "9",
-      "text": "La meilleure façon de prédire l'avenir est de le créer.",
-      "author": "Peter Drucker",
-      "createdAt": "2023-01-09T00:00:00.000Z"
-    },
-    {
-      "id": "1747312395774",
-      "text": "Le caleçon n’est pas lourd, mais pour le porter il faut deux mains.",
-      "author": "Siuuuu",
-      "createdAt": "2025-05-15T12:33:15.774Z"
-    },
-    {
       "id": "1747312424133",
-      "text": "La lumière est toujours en haut, c’est en bas qu’on l’éteint.",
+      "text": "La lumière est toujours en haut, c’est en bas qu’on l’étei",
       "author": "Siuuu",
-      "createdAt": "2025-05-15T12:33:44.133Z"
+      "createdAt": "2025-05-15T12:33:44.133Z",
+      "updatedAt": "2025-06-04T13:58:47.324Z"
     },
     {
       "id": "1747312438730",

@@ -1,94 +1,126 @@
-<script setup>
-import { ref, onMounted } from 'vue'
-import AddQuoteForm from '@/components/AddQuoteForm.vue'
-
-const quotes = ref([])
-const randomQuote = ref(null)
-const isLoading = ref(false)
-const error = ref(null)
-
-// Fonction pour récupérer toutes les citations
-const fetchQuotes = async () => {
-  isLoading.value = true
-  error.value = null
-  try {
-    const response = await fetch('/api/quotes')
-    if (!response.ok) throw new Error('Erreur lors de la récupération des citations')
-    const data = await response.json()
-    quotes.value = data.quotes
-  } catch (err) {
-    error.value = err.message
-  } finally {
-    isLoading.value = false
-  }
-}
-
-// Fonction pour récupérer une citation aléatoire
-const fetchRandomQuote = async () => {
-  isLoading.value = true
-  error.value = null
-  try {
-    const response = await fetch('/api/quotes/random')
-    if (!response.ok) throw new Error('Erreur lors de la récupération de la citation')
-    const data = await response.json()
-    randomQuote.value = data.quote
-  } catch (err) {
-    error.value = err.message
-  } finally {
-    isLoading.value = false
-  }
-}
-
-// Gestionnaire pour l'ajout d'une citation
-const handleQuoteAdded = (newQuote) => {
-  // Ajouter la nouvelle citation à la liste
-  quotes.value.push(newQuote)
-}
-
-onMounted(() => {
-  fetchQuotes()
-  fetchRandomQuote()
-})
-</script>
-
 <template>
-  <div class="w-full">
-    <!-- Section citation aléatoire -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2 text-center">Citation aléatoire</h2>
-      
-      <div v-if="isLoading && !randomQuote" class="flex justify-center py-8">
-        <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
-      
-      <div v-else-if="error" class="bg-red-50 border-l-4 border-red-500 p-4 rounded-md text-red-700">
-        {{ error }}
-      </div>
-      
-      <div v-else-if="randomQuote" class="bg-white shadow-sm rounded-lg p-8 mb-4 transition-all hover:shadow-md">
-        <blockquote class="italic text-2xl mb-4 text-gray-700 leading-relaxed">"{{ randomQuote.text }}"</blockquote>
-        <p class="text-right font-semibold text-gray-800">— {{ randomQuote.author }}</p>
-      </div>
-      
-      <div v-else class="bg-gray-50 rounded-lg p-6 mb-4 text-center text-gray-500">
-        <p>Aucune citation disponible</p>
-      </div>
-      
-      <div class="text-center mt-6">
-        <button 
-          @click="fetchRandomQuote" 
-          class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-6 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-300"
-        >
-          Afficher une autre citation
-        </button>
-      </div>
-    </section>
+  <div class="min-h-screen bg-gray-100 py-8">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <!-- En-tête -->
+        <div class="text-center mb-8">
+          <h1 class="text-4xl font-bold text-gray-900 mb-2">Citations Inspirantes</h1>
+          <p class="text-gray-600">Partagez vos citations préférées avec le monde</p>
+        </div>
 
-    <!-- Formulaire d'ajout de citation -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">Ajouter une citation</h2>
-      <AddQuoteForm @quote-added="handleQuoteAdded" />
-    </section>
+        <!-- Bouton pour ajouter une citation -->
+        <div class="mb-8">
+          <button
+            @click="showForm = true"
+            class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+            </svg>
+            Ajouter une citation
+          </button>
+        </div>
 
+        <!-- Formulaire d'ajout/modification -->
+        <div v-if="showForm" class="mb-8">
+          <QuoteForm
+            :quote="editingQuote"
+            :is-editing="!!editingQuote"
+            @submit="handleFormSubmit"
+            @cancel="closeForm"
+          />
+        </div>
+
+        <!-- Liste des citations -->
+        <div v-if="loading" class="text-center py-8">
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+        </div>
+        <div v-else-if="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+          {{ error }}
+        </div>
+        <div v-else>
+          <div v-if="quotes.length === 0" class="text-center py-8 text-gray-600">
+            Aucune citation disponible. Soyez le premier à en ajouter une !
+          </div>
+          <div v-else class="space-y-4">
+            <QuoteCard
+              v-for="quote in quotes"
+              :key="quote.id"
+              :quote="quote"
+              @edit="handleEdit"
+              @delete="handleDelete"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</template> 
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import { quoteService } from '../services/quoteService';
+import QuoteCard from '../components/QuoteCard.vue';
+import QuoteForm from '../components/QuoteForm.vue';
+
+const quotes = ref([]);
+const loading = ref(true);
+const error = ref(null);
+const showForm = ref(false);
+const editingQuote = ref(null);
+
+const loadQuotes = async () => {
+  try {
+    loading.value = true;
+    error.value = null;
+    const response = await quoteService.getAllQuotes();
+    quotes.value = response.quotes;
+  } catch (err) {
+    error.value = "Erreur lors du chargement des citations";
+    console.error(err);
+  } finally {
+    loading.value = false;
+  }
+};
+
+const handleFormSubmit = async (formData) => {
+  try {
+    if (editingQuote.value) {
+      await quoteService.updateQuote(editingQuote.value.id, formData);
+    } else {
+      await quoteService.addQuote(formData);
+    }
+    await loadQuotes();
+    closeForm();
+  } catch (err) {
+    error.value = editingQuote.value
+      ? "Erreur lors de la modification de la citation"
+      : "Erreur lors de l'ajout de la citation";
+    console.error(err);
+  }
+};
+
+const handleEdit = (quote) => {
+  editingQuote.value = quote;
+  showForm.value = true;
+};
+
+const handleDelete = async (id) => {
+  if (!confirm('Êtes-vous sûr de vouloir supprimer cette citation ?')) return;
+  
+  try {
+    await quoteService.deleteQuote(id);
+    await loadQuotes();
+  } catch (err) {
+    error.value = "Erreur lors de la suppression de la citation";
+    console.error(err);
+  }
+};
+
+const closeForm = () => {
+  showForm.value = false;
+  editingQuote.value = null;
+};
+
+onMounted(loadQuotes);
+</script> 
