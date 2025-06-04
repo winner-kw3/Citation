@@ -1,5 +1,19 @@
 <script setup>
-import { RouterView, RouterLink } from 'vue-router'
+import { ref, computed } from 'vue';
+import { RouterView, RouterLink } from 'vue-router';
+import { useAuth } from '../src/components/Auth.js';
+
+const { logout, user, initAuth } = useAuth();
+
+initAuth();
+
+const handleLogout = () => {
+  logout();
+};
+
+const isAuthenticated = computed(() => !!user.value);
+console.log("isAuthenticated:", isAuthenticated.value);
+
 </script>
 
 <template>
@@ -13,6 +27,12 @@ import { RouterView, RouterLink } from 'vue-router'
             <RouterLink to="/add" class="text-gray-600 hover:text-blue-600 transition-colors">Ajouter une citation</RouterLink>
             <RouterLink to="/about" class="text-gray-600 hover:text-blue-600 transition-colors">À propos</RouterLink>
           </nav>
+          <div>
+              <button v-if="isAuthenticated" @click="handleLogout" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Déconnexion</button>
+
+              <RouterLink v-else to="/login" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"> Connexion </RouterLink>
+          </div>
+
         </div>
       </div>
     </div>
@@ -25,7 +45,7 @@ import { RouterView, RouterLink } from 'vue-router'
     
     <footer class="bg-white shadow-sm py-4 mt-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
-        <p>KOUYATE Issa © {{ new Date().getFullYear() }}</p>
+        <p> WID © {{ new Date().getFullYear() }}</p>
       </div>
     </footer>
   </div>
@@ -38,3 +58,4 @@ body {
   line-height: 1.6;
 }
 </style>
+

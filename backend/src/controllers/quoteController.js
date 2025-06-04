@@ -1,121 +1,72 @@
-const fs = require('fs');
-const path = require('path');
+const quoteService = require('../services/quotesService');
 
-const quotesFilePath = path.join(__dirname, '../../quotes.json');
-
-// Initialiser le fichier de citations s'il n'existe pas
-const initializeQuotesFile = () => {
-  if (!fs.existsSync(quotesFilePath)) {
-    const initialQuotes = {
-      quotes: [
-        {
-          id: "1",
-          text: "La vie est ce qui arrive quand on est occupé à faire d'autres projets.",
-          author: "John Lennon",
-          createdAt: new Date().toISOString()
-        },
-        {
-          id: "2",
-          text: "Le succès, c'est d'aller d'échec en échec sans perdre son enthousiasme.",
-          author: "Winston Churchill",
-          createdAt: new Date().toISOString()
-        },
-        {
-          id: "3",
-          text: "La simplicité est la sophistication suprême.",
-          author: "Leonardo da Vinci",
-          createdAt: new Date().toISOString()
-        }
-      ]
-    };
-    fs.writeFileSync(quotesFilePath, JSON.stringify(initialQuotes, null, 2));
+// GET /quotes
+const getAllQuotes = async (req, res) => {
+  try {
+    const quotes = await quoteService.getAllQuotes();
+    res.json(quotes);
+  } catch (err) {
+    res.status(500).json({ error: 'Erreur serveur' });
   }
 };
 
-// Lire les citations
-const readQuotes = () => {
-  const data = fs.readFileSync(quotesFilePath, "utf8");
-  return JSON.parse(data);
-};
-
-// Écrire les citations
-const writeQuotes = (quotes) => {
-  fs.writeFileSync(quotesFilePath, JSON.stringify(quotes, null, 2));
-};
-
-// Obtenir une citation aléatoire
-const getRandomQuote = () => {
-  const { quotes } = readQuotes();
-  if (quotes.length === 0) {
-    return null;
+// GET /quotes/random
+const getRandomQuote = async (req, res) => {
+  try {
+    const quote = await quoteService.getRandomQuote();
+    if (!quote) return res.status(404).json({ message: 'Aucune citation trouvée.' });
+    res.json(quote);
+  } catch (err) {
+    res.status(500).json({ error: 'Erreur serveur' });
   }
-  const randomIndex = Math.floor(Math.random() * quotes.length);
-  return quotes[randomIndex];
 };
 
-// Obtenir toutes les citations
-const getAllQuotes = () => {
-  return readQuotes();
-};
-
-// Ajouter une nouvelle citation
-const addQuote = (text, author) => {
-  const quotes = readQuotes();
-  const newQuote = {
-    id: Date.now().toString(),
-    text,
-    author,
-    createdAt: new Date().toISOString()
-  };
-  
-  quotes.quotes.push(newQuote);
-  writeQuotes(quotes);
-  
-  return newQuote;
-};
-
-// Modifier une citation
-const updateQuote = (id, { text, author }) => {
-  const quotes = readQuotes();
-  const quoteIndex = quotes.quotes.findIndex(quote => quote.id === id);
-  
-  if (quoteIndex === -1) {
-    return null;
+// POST /quotes
+const addQuote = async (req, res) => {
+  const { text, author } = req.body;
+  if (!text || !author) {
+    return res.status(400).json({ error: 'Texte et auteur obligatoires' });
   }
-  
-  const updatedQuote = {
-    ...quotes.quotes[quoteIndex],
-    text,
-    author,
-    updatedAt: new Date().toISOString()
-  };
-  
-  quotes.quotes[quoteIndex] = updatedQuote;
-  writeQuotes(quotes);
-  
-  return updatedQuote;
+
+  try {
+    const newQuote = await quoteService.addQuote(text, author);
+    res.status(201).json(newQuote);
+  } catch (err) {
+    res.status(500).json({ error: 'Erreur lors de l\'ajout' });
+  }
 };
 
-// Supprimer une citation
-const deleteQuote = (id) => {
-  const quotes = readQuotes();
-  const initialLength = quotes.quotes.length;
-  
-  quotes.quotes = quotes.quotes.filter(quote => quote.id !== id);
-  
-  if (quotes.quotes.length === initialLength) {
-    return false;
+// PUT /quotes/:id
+const updateQuote = async (req, res) => {
+  const { id } = req.params;
+  const { text, author } = req.body;
+
+  try {
+    const updatedQuote = await quoteService.updateQuote(id, { text, author });
+    if (!updatedQuote) return res.status(404).json({ message: 'Citation non trouvée' });
+    res.json(updatedQuote);
+  } catch (err) {
+    res.status(500).json({ error: 'Erreur lors de la modification' });
   }
-  
-  writeQuotes(quotes);
-  return true;
+};
+
+// DELETE /quotes/:id
+const deleteQuote = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const success = await quoteService.deleteQuote(id);
+    if (!success) return res.status(404).json({ message: 'Citation non trouvée' });
+    res.json({ message: 'Citation supprimée' });
+  } catch (err) {
+    res.status(500).json({ error: 'Erreur lors de la suppression' });
+  }
 };
 
 module.exports = {
-  initializeQuotesFile,
-  getRandomQuote,
   getAllQuotes,
+  getRandomQuote,
   addQuote,
   updateQuote,
   deleteQuote
-}; 
+};
