@@ -8,6 +8,26 @@
           <p class="text-gray-600">Partagez vos citations préférées avec le monde</p>
         </div>
 
+        <!-- Citation aléatoire -->
+        <div class="mb-8 bg-white rounded-lg shadow-lg p-6">
+          <div v-if="randomLoading" class="text-center py-4">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+          </div>
+          <div v-else-if="randomError" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+            {{ randomError }}
+          </div>
+          <div v-else-if="randomQuote" class="text-center">
+            <blockquote class="italic text-2xl mb-2 text-gray-700">"{{ randomQuote.text }}"</blockquote>
+            <p class="text-right font-semibold text-gray-800">— {{ randomQuote.author }}</p>
+          </div>
+          <div class="flex justify-center mt-4 space-x-2">
+            <button @click="fetchRandomQuote" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors">Nouvelle citation aléatoire</button>
+            <button @click="showAll = !showAll" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition-colors">
+              {{ showAll ? 'Masquer toutes les citations' : 'Voir toutes les citations' }}
+            </button>
+          </div>
+        </div>
+
         <!-- Bouton pour ajouter une citation -->
         <div class="mb-8">
           <button
@@ -32,24 +52,26 @@
         </div>
 
         <!-- Liste des citations -->
-        <div v-if="loading" class="text-center py-8">
-          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-        </div>
-        <div v-else-if="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
-          {{ error }}
-        </div>
-        <div v-else>
-          <div v-if="quotes.length === 0" class="text-center py-8 text-gray-600">
-            Aucune citation disponible. Soyez le premier à en ajouter une !
+        <div v-if="showAll">
+          <div v-if="loading" class="text-center py-8">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
           </div>
-          <div v-else class="space-y-4">
-            <QuoteCard
-              v-for="quote in quotes"
-              :key="quote.id"
-              :quote="quote"
-              @edit="handleEdit"
-              @delete="handleDelete"
-            />
+          <div v-else-if="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+            {{ error }}
+          </div>
+          <div v-else>
+            <div v-if="quotes.length === 0" class="text-center py-8 text-gray-600">
+              Aucune citation disponible. Soyez le premier à en ajouter une !
+            </div>
+            <div v-else class="space-y-4">
+              <QuoteCard
+                v-for="quote in quotes"
+                :key="quote.id"
+                :quote="quote"
+                @edit="handleEdit"
+                @delete="handleDelete"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -68,6 +90,25 @@ const loading = ref(true);
 const error = ref(null);
 const showForm = ref(false);
 const editingQuote = ref(null);
+const showAll = ref(false);
+
+const randomQuote = ref(null);
+const randomLoading = ref(false);
+const randomError = ref(null);
+
+const fetchRandomQuote = async () => {
+  try {
+    randomLoading.value = true;
+    randomError.value = null;
+    const response = await quoteService.getRandomQuote();
+    randomQuote.value = response.quote;
+  } catch (err) {
+    randomError.value = "Erreur lors de la récupération de la citation aléatoire";
+    console.error(err);
+  } finally {
+    randomLoading.value = false;
+  }
+};
 
 const loadQuotes = async () => {
   try {
@@ -122,5 +163,8 @@ const closeForm = () => {
   editingQuote.value = null;
 };
 
-onMounted(loadQuotes);
+onMounted(() => {
+  loadQuotes();
+  fetchRandomQuote();
+});
 </script> 
