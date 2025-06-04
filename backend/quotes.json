@@ -1,0 +1,250 @@
+{
+  "quotes": [
+    {
+      "id": "9",
+      "text": "La meilleure façon de prédire l'avenir est de le créer.",
+      "author": "Peter Drucker",
+      "createdAt": "2023-01-09T00:00:00.000Z"
+    },
+    {
+      "id": "1747312395774",
+      "text": "Le caleçon n’est pas lourd, mais pour le porter il faut deux mains.",
+      "author": "Siuuuu",
+      "createdAt": "2025-05-15T12:33:15.774Z"
+    },
+    {
+      "id": "1747312424133",
+      "text": "La lumière est toujours en haut, c’est en bas qu’on l’éteint.",
+      "author": "Siuuu",
+      "createdAt": "2025-05-15T12:33:44.133Z"
+    },
+    {
+      "id": "1747312438730",
+      "text": "Le ventilateur regarde à gauche et à droite, mais on sort dans son dos pour l’éteindre.",
+      "author": "Siuuu",
+      "createdAt": "2025-05-15T12:33:58.730Z"
+    },
+    {
+      "id": "1747312495268",
+      "text": "Nankurunaisa = avec le temps, tout s'arrangera.",
+      "author": "Issa",
+      "createdAt": "2025-05-15T12:34:55.268Z"
+    },
+    {
+      "id": "1747312510658",
+      "text": "À force de taper à la porte du diable, il finit par vous donner une femme claire.",
+      "author": "Cameroun",
+      "createdAt": "2025-05-15T12:35:10.658Z"
+    },
+    {
+      "id": "1747312553403",
+      "text": "Jeûner avec le crédit des gens, c’est un régime.",
+      "author": "Islam",
+      "createdAt": "2025-05-15T12:35:53.403Z"
+    },
+    {
+      "id": "1747312563911",
+      "text": "« La pluie mouille, le soleil brûle. »",
+      "author": "CIV",
+      "createdAt": "2025-05-15T12:36:03.911Z"
+    },
+    {
+      "id": "1747312576326",
+      "text": "Le putois ne sent pas l’odeur de ses aisselles.",
+      "author": "Se Laver",
+      "createdAt": "2025-05-15T12:36:16.326Z"
+    },
+    {
+      "id": "1747312589528",
+      "text": "Les gens portent un habit, mais moi je m’habille.",
+      "author": "Richesse",
+      "createdAt": "2025-05-15T12:36:29.528Z"
+    },
+    {
+      "id": "1747312598956",
+      "text": "Si tu sais que t’es pas une priorité, te bats pas.",
+      "author": "Amour",
+      "createdAt": "2025-05-15T12:36:38.956Z"
+    },
+    {
+      "id": "1747312610743",
+      "text": "L’eau chaude ne doit pas oublier qu’elle a été froide.",
+      "author": "Pauvreté",
+      "createdAt": "2025-05-15T12:36:50.743Z"
+    },
+    {
+      "id": "1747312629173",
+      "text": "L’amour sans argent s’arrête au collège.",
+      "author": "Amour",
+      "createdAt": "2025-05-15T12:37:09.173Z"
+    },
+    {
+      "id": "1747312640224",
+      "text": "Pour connaître la largeur des feuilles d’un arbre, faut aller sous l’arbre.",
+      "author": "Africa",
+      "createdAt": "2025-05-15T12:37:20.224Z"
+    },
+    {
+      "id": "1747312656329",
+      "text": "Quand les yeux pleurent, le nez ne peut pas être indifférent.",
+      "author": "CIV",
+      "createdAt": "2025-05-15T12:37:36.329Z"
+    },
+    {
+      "id": "1747312671588",
+      "text": "Quelle que soit la force d’une pluie, elle ne peut changer le plumage d’un oiseau.",
+      "author": "Pauvreté",
+      "createdAt": "2025-05-15T12:37:51.588Z"
+    },
+    {
+      "id": "1747312688213",
+      "text": "Ils ont la montre, j’ai le temps.",
+      "author": "Orgueil ",
+      "createdAt": "2025-05-15T12:38:08.213Z"
+    },
+    {
+      "id": "1747312708162",
+      "text": "Le sel ne dit jamais \"je suis doux\".",
+      "author": "Orgueil ",
+      "createdAt": "2025-05-15T12:38:28.162Z"
+    },
+    {
+      "id": "1747312720114",
+      "text": "Si tu veux mourir d’AVC, faut mettre une femme claire dans ton foyer",
+      "author": "Africa",
+      "createdAt": "2025-05-15T12:38:40.114Z"
+    },
+    {
+      "id": "1747312734072",
+      "text": "Même après le mariage, Satan restera toujours Satan.",
+      "author": "Femme Claire",
+      "createdAt": "2025-05-15T12:38:54.072Z"
+    },
+    {
+      "id": "1747312747767",
+      "text": "Ça ne sert à rien d’avoir les lèvres roses si ta bouche sent.",
+      "author": "Peulh",
+      "createdAt": "2025-05-15T12:39:07.767Z"
+    },
+    {
+      "id": "1747312760004",
+      "text": "C’est quand tu cours derrière un poulet qu’il cherche à s’envoler, sinon lui-même, il sait qu’il ne vole pas.",
+      "author": "Pauvreté",
+      "createdAt": "2025-05-15T12:39:20.004Z"
+    },
+    {
+      "id": "1747312773493",
+      "text": "Tu manges alloco dans un papier, après tu lis le papier,\nc’est que t’es pas rassasié.",
+      "author": "CIV",
+      "createdAt": "2025-05-15T12:39:33.493Z"
+    },
+    {
+      "id": "1747312825762",
+      "text": "Avant de te vanter que plein de gars te courent après, rappelle-toi qu’un gars qui s’ennuie est capable de jouer au foot avec un caillou.",
+      "author": "Orgueil Femme",
+      "createdAt": "2025-05-15T12:40:25.762Z"
+    },
+    {
+      "id": "1747312841655",
+      "text": "L'eau éteint le feu, mais le bateau prend feu sur l'eau. C’est pourquoi une femme claire n’ira jamais au paradis 🙌🏿",
+      "author": "Pauvreté",
+      "createdAt": "2025-05-15T12:40:41.655Z"
+    },
+    {
+      "id": "1747312856690",
+      "text": "Le poulet boit de l’eau, mais le poulet ne pisse pas.",
+      "author": "BB Sans OS",
+      "createdAt": "2025-05-15T12:40:56.690Z"
+    },
+    {
+      "id": "1747312866407",
+      "text": "On ne marche pas deux fois sur les testicules d’un aveugle.",
+      "author": "GN",
+      "createdAt": "2025-05-15T12:41:06.407Z"
+    },
+    {
+      "id": "1747312882103",
+      "text": "L’oiseau nourrit ses enfants, mais il n’a pas de seins.",
+      "author": "Pauvreté",
+      "createdAt": "2025-05-15T12:41:22.103Z"
+    },
+    {
+      "id": "1747312912936",
+      "text": "Le chien ne sait jamais où il va, mais il sait chasser.",
+      "author": "Pauvreté",
+      "createdAt": "2025-05-15T12:41:52.936Z"
+    },
+    {
+      "id": "1747312928340",
+      "text": "Le temps que l’agriculteur prend pour aiguiser sa machette n’est pas du temps perdu.",
+      "author": "Pauvreté",
+      "createdAt": "2025-05-15T12:42:08.340Z"
+    },
+    {
+      "id": "1747312947369",
+      "text": "Une mangue bien mûre ne pourrit jamais en l’air.",
+      "author": "Pauvreté",
+      "createdAt": "2025-05-15T12:42:27.369Z"
+    },
+    {
+      "id": "1747312992445",
+      "text": "Le jour où un œuf décide de se cogner contre un caillou, c’est qu’il décide de ne plus exister.",
+      "author": "Vanité",
+      "createdAt": "2025-05-15T12:43:12.445Z"
+    },
+    {
+      "id": "1747313005070",
+      "text": "On ne peut pas coiffer quelqu’un en son absence.",
+      "author": "Africa",
+      "createdAt": "2025-05-15T12:43:25.070Z"
+    },
+    {
+      "id": "1747313017417",
+      "text": "Quand le poisson sort de l’eau pour vous dire que le caïman a mal au crâne, faut le croire.",
+      "author": "CIV",
+      "createdAt": "2025-05-15T12:43:37.417Z"
+    },
+    {
+      "id": "1747313029471",
+      "text": "Où la grenouille est juge, le crapaud aura toujours raison.",
+      "author": "Amour",
+      "createdAt": "2025-05-15T12:43:49.471Z"
+    },
+    {
+      "id": "1747313042686",
+      "text": "C’est vrai que j’ai rien, mais je mets ma main dans ma poche, c’est pas pour toucher mes testicules.",
+      "author": "Issa KOUYATE",
+      "createdAt": "2025-05-15T12:44:02.686Z"
+    },
+    {
+      "id": "1747313053777",
+      "text": "Pour réclamer l’aile du poulet, faut être là quand on le découpe.",
+      "author": "Africa",
+      "createdAt": "2025-05-15T12:44:13.777Z"
+    },
+    {
+      "id": "1747313066231",
+      "text": "Le caca n’est pas piquant, mais quand tu marches dessus, tu boîtes.",
+      "author": "CIV",
+      "createdAt": "2025-05-15T12:44:26.231Z"
+    },
+    {
+      "id": "1747313076671",
+      "text": "On ne va pas vers ce qui vient vers vous.",
+      "author": "Avenir",
+      "createdAt": "2025-05-15T12:44:36.671Z"
+    },
+    {
+      "id": "1747313117218",
+      "text": "Le seul endroit où viens avant le travail, c’est dans le dictionnaire",
+      "author": "Profond",
+      "createdAt": "2025-05-15T12:45:17.218Z"
+    },
+    {
+      "id": "1747313763225",
+      "text": "Si ton ami(e) part à San Francisco, sache qu'il (elle) sera comme un étranger à ton égard.",
+      "author": "Winner Dijonnais",
+      "createdAt": "2025-05-15T12:56:03.225Z"
+    }
+  ]
+}
